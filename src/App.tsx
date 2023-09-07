@@ -3,6 +3,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { PiPProvider, usePictureInPicture } from "./PiPProvider";
 import PiPWindow from "./PiPWindow";
+import { useCallback, useEffect } from "react";
 
 function App() {
   return (
@@ -29,18 +30,15 @@ function App() {
 }
 
 function Test() {
-  const context = usePictureInPicture();
+  const { requestPipWindow, pipWindow } = usePictureInPicture();
+  const startPiP = useCallback(() => {
+    requestPipWindow(500, 500);
+  }, [requestPipWindow]);
 
   return (
     <div>
-      <button
-        onClick={() => {
-          context.requestPipWindow(500, 500);
-        }}
-      >
-        PIP
-      </button>
-      {context.pipWindow && <PiPWindow pipWindow={context.pipWindow} />}
+      <button onClick={startPiP}>PIP</button>
+      {pipWindow && <PiPWindow pipWindow={pipWindow} />}
     </div>
   );
 }
