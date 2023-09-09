@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 
 type PiPProviderProps = {
   children: React.ReactNode;
@@ -7,12 +7,20 @@ type PiPProviderProps = {
 type PiPContextType = {
   pipWindow: Window | null;
   requestPipWindow: (width: number, height: number) => Promise<Window>;
+  closePipWindow: () => void;
 };
 
 const PiPContext = createContext<PiPContextType | undefined>(undefined);
 
 export function PiPProvider({ children }: PiPProviderProps) {
   const [pipWindow, setPipWindow] = useState<Window | null>(null);
+
+  const closePipWindow = useCallback(() => {
+    if (pipWindow != null) {
+      pipWindow.close();
+      setPipWindow(null);
+    }
+  }, [pipWindow]);
 
   const requestPipWindow = async (width: number, height: number) => {
     const pipWindow = await window.documentPictureInPicture.requestWindow({
@@ -40,7 +48,9 @@ export function PiPProvider({ children }: PiPProviderProps) {
   };
 
   return (
-    <PiPContext.Provider value={{ pipWindow, requestPipWindow }}>
+    <PiPContext.Provider
+      value={{ pipWindow, requestPipWindow, closePipWindow }}
+    >
       {children}
     </PiPContext.Provider>
   );

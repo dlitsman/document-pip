@@ -30,14 +30,16 @@ function App() {
 }
 
 function Test() {
-  const { requestPipWindow, pipWindow } = usePictureInPicture();
+  const { requestPipWindow, pipWindow, closePipWindow } = usePictureInPicture();
   const startPiP = useCallback(() => {
     requestPipWindow(500, 500);
   }, [requestPipWindow]);
 
   return (
     <div>
-      <button onClick={startPiP}>PIP</button>
+      <button onClick={pipWindow ? closePipWindow : startPiP}>
+        {pipWindow ? "Close PIP" : "Open PIP"}
+      </button>
       {pipWindow && <PiPWindow pipWindow={pipWindow} />}
     </div>
   );
