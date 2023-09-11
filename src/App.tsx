@@ -16,7 +16,8 @@ function App() {
 }
 
 function Test() {
-  const { requestPipWindow, pipWindow, closePipWindow } = usePictureInPicture();
+  const { isSupported, requestPipWindow, pipWindow, closePipWindow } =
+    usePictureInPicture();
   const startPiP = useCallback(() => {
     requestPipWindow(500, 500);
   }, [requestPipWindow]);
@@ -27,11 +28,19 @@ function Test() {
   return (
     <div>
       <div className="card">{counterComponent}</div>
-      <button onClick={pipWindow ? closePipWindow : startPiP}>
-        {pipWindow ? "Close PIP" : "Open PIP"}
-      </button>
-      {pipWindow && (
-        <PiPWindow pipWindow={pipWindow}>{counterComponent}</PiPWindow>
+      {isSupported ? (
+        <>
+          <button onClick={pipWindow ? closePipWindow : startPiP}>
+            {pipWindow ? "Close PIP" : "Open PIP"}
+          </button>
+          {pipWindow && (
+            <PiPWindow pipWindow={pipWindow}>{counterComponent}</PiPWindow>
+          )}
+        </>
+      ) : (
+        <div className="error">
+          Document Picture-in-Picture is not supported in this browser
+        </div>
       )}
     </div>
   );
