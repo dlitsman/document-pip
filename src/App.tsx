@@ -7,7 +7,7 @@ import Counter from "./Counter";
 function App() {
   return (
     <>
-      <h1>Picture-in-picture example</h1>
+      <h1>Document Picture-in-Picture</h1>
       <PiPProvider>
         <Test />
       </PiPProvider>
