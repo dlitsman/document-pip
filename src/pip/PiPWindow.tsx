@@ -7,11 +7,9 @@ type PiPWindowProps = {
   children: React.ReactNode;
 };
 
-const PiPWindow = ({ pipWindow, children }: PiPWindowProps) => {
+export default function PiPWindow({ pipWindow, children }: PiPWindowProps) {
   return createPortal(
     <div className="pipRoot">{children}</div>,
     pipWindow.document.body
   );
-};
-
-export default PiPWindow;
+}

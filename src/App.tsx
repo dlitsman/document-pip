@@ -9,13 +9,13 @@ function App() {
     <>
       <h1>Document Picture-in-Picture</h1>
       <PiPProvider>
-        <Test />
+        <Example />
       </PiPProvider>
     </>
   );
 }
 
-function Test() {
+function Example() {
   const { isSupported, requestPipWindow, pipWindow, closePipWindow } =
     usePictureInPicture();
   const startPiP = useCallback(() => {
@@ -28,10 +28,11 @@ function Test() {
   return (
     <div>
       <div className="card">{counterComponent}</div>
+      {/* Make sure to have some fallback in case if API is not supported */}
       {isSupported ? (
         <>
           <button onClick={pipWindow ? closePipWindow : startPiP}>
-            {pipWindow ? "Close PIP" : "Open PIP"}
+            {pipWindow ? "Close PiP" : "Open PiP"}
           </button>
           {pipWindow && (
             <PiPWindow pipWindow={pipWindow}>{counterComponent}</PiPWindow>
