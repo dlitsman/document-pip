@@ -79,7 +79,7 @@ export function PiPProvider({ children }: PiPProviderProps) {
   return <PiPContext.Provider value={value}>{children}</PiPContext.Provider>;
 }
 
-export const usePictureInPicture = (): PiPContextType => {
+export function usePictureInPicture(): PiPContextType {
   const context = useContext(PiPContext);
 
   if (context === undefined) {
@@ -87,4 +87,4 @@ export const usePictureInPicture = (): PiPContextType => {
   }
 
   return context;
-};
+}
