@@ -5,11 +5,14 @@ import { useCallback, useState } from "react";
 import Counter from "./Counter";
 
 function App() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const simple = urlParams.get("simple");
+
   return (
     <>
       <h1>Document Picture-in-Picture</h1>
       <PiPProvider>
-        <ExampleWithState />
+        {simple != null ? <Example /> : <ExampleWithState />}
       </PiPProvider>
     </>
   );
@@ -51,7 +54,6 @@ function ExampleWithState() {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function Example() {
   const { isSupported, requestPipWindow, pipWindow, closePipWindow } =
     usePiPWindow();
