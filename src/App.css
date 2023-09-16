@@ -12,3 +12,13 @@
 .error {
   color: rgb(165, 39, 39);
 }
+
+.pipRoot {
+  background: #c8dac8;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  text-align: center;
+}
