@@ -1,5 +1,5 @@
 import "./App.css";
-import { PiPProvider, usePictureInPicture } from "./pip/PiPProvider";
+import { PiPProvider, usePiPWindow } from "./pip/PiPProvider";
 import PiPWindow from "./pip/PiPWindow";
 import { useCallback, useState } from "react";
 import Counter from "./Counter";
@@ -17,7 +17,7 @@ function App() {
 
 function Example() {
   const { isSupported, requestPipWindow, pipWindow, closePipWindow } =
-    usePictureInPicture();
+    usePiPWindow();
   const startPiP = useCallback(() => {
     requestPipWindow(500, 500);
   }, [requestPipWindow]);
