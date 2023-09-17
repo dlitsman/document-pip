@@ -62,6 +62,8 @@ function Example() {
     requestPipWindow(500, 500);
   }, [requestPipWindow]);
 
+  const [count, setCount] = useState(0);
+
   return (
     <div>
       {/* Make sure to have some fallback in case if API is not supported */}
@@ -79,6 +81,13 @@ function Example() {
                 }}
               >
                 <h3>Hello in PiP!</h3>
+                <button
+                  onClick={() => {
+                    setCount((count) => count + 1);
+                  }}
+                >
+                  Clicks count is {count}
+                </button>
               </div>
             </PiPWindow>
           )}
